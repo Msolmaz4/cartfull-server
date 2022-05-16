@@ -23,8 +23,8 @@ app.use('*',(req,res,next)=>{
 })
 
 console.log(('ilk gecti'))
-
-app.use('/products',productRouter)
+//import routes
+//app.use('/products',productRouter)
 
 console.log('ilk ruter')
 app.use('*',(req,res,next)=>{
