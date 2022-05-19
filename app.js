@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express();
+const productRouter = require('./routes/productRouter')
 
 
 //connection with db
@@ -24,7 +25,7 @@ app.use('*',(req,res,next)=>{
 
 console.log(('ilk gecti'))
 //import routes
-//app.use('/products',productRouter)
+app.use('/products',productRouter)
 
 console.log('ilk ruter')
 app.use('*',(req,res,next)=>{
