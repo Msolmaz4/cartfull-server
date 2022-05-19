@@ -1,4 +1,4 @@
-const { getAllProducts ,getOneProduct,addOneProduct } = require('../controlles/productController');
+const { getAllProducts ,getOneProduct,addOneProduct ,updateOneProduct} = require('../controlles/productController');
 
 const router =require('express').Router();
 
@@ -9,7 +9,7 @@ router
 router
  .get('/product/:id',getOneProduct)
  .post('/product' ,addOneProduct)
-   //.patch('/product/:id')
+ .patch('/product/:id',updateOneProduct)
    //.delete('/product/:id')   
 
 module.exports = router

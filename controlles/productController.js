@@ -31,7 +31,10 @@ exports.addOneProduct = async (req,res) =>{
         const {name,price,category} = req.body;
         if(name && price && category){
             const newProduct = await new Product({name:name,price:price,category:category});
-            newProduct.save();
+            await newProduct.save();
+            res.status(200).json({
+                message:'succes'
+            })
         }else{
             res.status(400).send('invalid input')
         }
@@ -40,6 +43,23 @@ exports.addOneProduct = async (req,res) =>{
         res.send(err.message)
         console.log(err)
 
+    }
+
+}
+
+exports.updateOneProduct = async (req,res) =>{
+    try{
+        const { id } = req.params;
+        const {name, price ,category } = req.body;
+        if( name && price && category ){
+            const product = await Product.findByIdAndUpdate(id,{name:name ,price:price,category:category},{runValidators:true,new:true})
+        }else{
+            res.status(400).send('Invalid Input')
+        }
+
+    }catch(err){
+        res.send(err.message)
+        console.log(err)
     }
 
 }
