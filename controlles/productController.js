@@ -53,6 +53,10 @@ exports.updateOneProduct = async (req,res) =>{
         const {name, price ,category } = req.body;
         if( name && price && category ){
             const product = await Product.findByIdAndUpdate(id,{name:name ,price:price,category:category},{runValidators:true,new:true})
+            res.status(200).json({
+                message:'succes',
+                data:product
+            })
         }else{
             res.status(400).send('Invalid Input')
         }
@@ -62,4 +66,21 @@ exports.updateOneProduct = async (req,res) =>{
         console.log(err)
     }
 
+}
+exports.deleteOneProduct =  (req,res) => {
+try{ 
+    const { id } =req.params
+    if(!id){
+        res.status(400).send({message:'invalid id'})
+    }
+    Product.findByIdAndDelete(id)
+    .then(()=>res.status(200).json({
+        message:'succes'
+    }))
+    .catch(err=>res.status(400).send('invalid not'))
+
+}catch(err){
+    res.send(err.message)
+        console.log(err)
+}
 }
